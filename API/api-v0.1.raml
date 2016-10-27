@@ -299,21 +299,6 @@ securedBy: [ oauth_2_0 ]
     delete:
       description: Delete model
 
-/group:
-  description: Groups
-  get:
-    is: [ paged, sortable, searchable, relations ]
-    description: Get collection
-  post:
-    description: Create model
-  /{entity_id}:
-    get:
-      description: Read model
-    put:
-      description: Update model
-    delete:
-      description: Delete model
-
 /sales:
   description: Sales
   /history:
@@ -334,21 +319,50 @@ securedBy: [ oauth_2_0 ]
 /import:
   description: Import
 
-/member:
-  description: Manage single member accounts
-  get:
-    is: [ paged, sortable, searchable, relations ]
-    description: Returns a list of all members
-  post:
-    description: Create a new member
-  /{member_id}:
-    description: Manage a single member
+/membership:
+  /member:
+    description: Manage single member accounts
     get:
-      description: Returns a single member
-    put:
-      description: Updates a member
-    delete:
-      description: Deletes a member
-  /search:
+      is: [ paged, sortable, searchable ]
+      description: Returns a list of all members
     post:
-      description: Fulltext search
+      description: Create a new member
+    /{member_id}:
+      description: Manage a single member
+      get:
+        description: Returns a single member
+      put:
+        description: Updates a member
+      delete:
+        description: Deletes a member
+    /search:
+      post:
+        description: Fulltext search
+  /group:
+    description: Groups
+    get:
+      is: [ paged, sortable, searchable ]
+      description: Get collection
+    post:
+      description: Create model
+    /{entity_id}:
+      get:
+        description: Read model
+      put:
+        description: Update model
+      delete:
+        description: Delete model
+  /role:
+      description: Roles
+      get:
+        is: [ paged, sortable, searchable ]
+        description: Get collection
+      post:
+        description: Create model
+      /{entity_id}:
+        get:
+          description: Read model
+        put:
+          description: Update model
+        delete:
+          description: Delete model
