@@ -14,10 +14,10 @@ securitySchemes:
             type: string
         responses:
           401:
-            description: FU!
+            description: You have no permission to access this content
       settings:
-        authorizationUri: http://internal.dev/api/v2/oauth/meep
-        accessTokenUri: http://internal.dev/api/v2/oauth/access_token
+        authorizationUri: http://api.makeradmin.dev/oauth/token
+        accessTokenUri: http://api.makeradmin.dev/oauth/token
         authorizationGrants: [ owner ]
         scopes:
           - "user"
@@ -66,8 +66,8 @@ traits:
           required: false
           type: string
 
-securedBy: [ oauth_2_0 ]
 /economy/{accountingperiod}:
+  securedBy: [ oauth_2_0 ]
   /masterledger:
     get:
       description: Receives the full master ledger
@@ -269,40 +269,38 @@ securedBy: [ oauth_2_0 ]
     delete:
       description: Delete model
 
-/subscription:
-  description: Subscription
-  get:
-    is: [ paged, sortable, searchable, relations ]
-    description: Get collection
-  post:
-    description: Create model
-  /{entity_id}:
-    get:
-      description: Read model
-    put:
-      description: Update model
-    delete:
-      description: Delete model
-
-/product:
-  description: product
-  get:
-    is: [ paged, sortable, searchable, relations ]
-    description: Get collection
-  post:
-    description: Create model
-  /{entity_id}:
-    get:
-      description: Read model
-    put:
-      description: Update model
-    delete:
-      description: Delete model
-
 /sales:
   description: Sales
   /history:
     description: Sales history
+    get:
+      is: [ paged, sortable, searchable, relations ]
+      description: Get collection
+    post:
+      description: Create model
+    /{entity_id}:
+      get:
+        description: Read model
+      put:
+        description: Update model
+      delete:
+        description: Delete model
+  /subscription:
+    description: Subscription
+    get:
+      is: [ paged, sortable, searchable, relations ]
+      description: Get collection
+    post:
+      description: Create model
+    /{entity_id}:
+      get:
+        description: Read model
+      put:
+        description: Update model
+      delete:
+        description: Delete model
+  /product:
+    description: product
     get:
       is: [ paged, sortable, searchable, relations ]
       description: Get collection
@@ -335,9 +333,9 @@ securedBy: [ oauth_2_0 ]
         description: Updates a member
       delete:
         description: Deletes a member
-    /search:
-      post:
-        description: Fulltext search
+  /authenticate:
+    post:
+      description: Authenticate a member
   /group:
     description: Groups
     get:
@@ -345,7 +343,7 @@ securedBy: [ oauth_2_0 ]
       description: Get collection
     post:
       description: Create model
-    /{entity_id}:
+    /{group_id}:
       get:
         description: Read model
       put:
@@ -359,10 +357,68 @@ securedBy: [ oauth_2_0 ]
         description: Get collection
       post:
         description: Create model
-      /{entity_id}:
+      /{role_id}:
         get:
           description: Read model
         put:
           description: Update model
         delete:
           description: Delete model
+  /permission:
+      description: Roles
+      get:
+        is: [ paged, sortable, searchable ]
+        description: Get collection
+      post:
+        description: Create model
+      /{permission_id}:
+        get:
+          description: Read model
+        put:
+          description: Update model
+        delete:
+          description: Delete model
+
+/oauth:
+  description: OAuth 2.0 compatible API
+  /token:
+    get:
+      securedBy: [ oauth_2_0 ]
+      description: Get a list of active access tokens
+      responses:
+        200:
+          description: A list of access tokens
+    post:
+      description: Create a new access token (Login)
+      queryParameters:
+        grant_type:
+          description: Select the grant type
+          required: true
+          type: string
+          enum: [password]
+        username:
+          description: Username
+          required: true
+          type: string
+        password:
+          description: Password
+          required: true
+          type: string
+      responses:
+        200:
+          description: Successfully logged in
+        401:
+          description: The username and/or password you specified was wrong
+        422:
+          description: Validation error; username, password or grant_type is missing
+        429:
+          description: Too many failed attempts
+    /{access_token}:
+      delete:
+        securedBy: [ oauth_2_0 ]
+        description: Delete an access token (Logout)
+        responses:
+          200:
+            description: Successfully deleted
+          404:
+            description: Could not find the specified access_token in database
