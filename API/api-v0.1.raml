@@ -1,7 +1,7 @@
 #%RAML 0.8
-title: Internal API v1.0
-version: 2
-baseUri: http://internal.dev/api/v2/
+title: MakerAdmin API v1.0
+version: 1
+baseUri: http://api.makeradmin.dev/
 
 securitySchemes:
   - oauth_2_0:
@@ -66,131 +66,159 @@ traits:
           required: false
           type: string
 
-/economy/{accountingperiod}:
+/economy:
   securedBy: [ oauth_2_0 ]
-  /masterledger:
+  /accountingperiod:
     get:
-      description: Receives the full master ledger
-
-  /account:
-    description: Manage accounting accounts
-    get:
-      is: [ paged ]
-      description: This call returns an list of all accounts
+      is: [ paged, sortable, searchable ]
+      description: Get a list of all accounting periods
     post:
-      description: Creates a new account
-      queryParameters:
-        account_number:
-          description: Account number
-          type: integer
-          required: true
-          example: 3890
-        title:
-          description: Account title
-          type: string
-          required: true
-          example: Medlemsintäkter
-        description:
-          description: Account description
-          type: string
-          example: Innehåller endast medlemsavgifter för årsmedlemskap
-    /{account_id}:
-      description: Returns an invidual account
+      description: Create a new accounting period
+    /{accountingperiod}:
       get:
-        description: Returns an account specified by account_id
+        description: Get an accounting period
       put:
-        description: Updates an account specified by account_id
+        description: Update an accounting period
+      delete:
+        description: Delete an accounting period
+
+  /{accountingperiod}:
+
+    /account:
+      description: Manage accounting accounts
+      get:
+        is: [ paged, sortable, searchable ]
+        description: This call returns an list of all accounts
+      post:
+        description: Creates a new account
         queryParameters:
           account_number:
             description: Account number
             type: integer
+            required: true
             example: 3890
           title:
             description: Account title
             type: string
+            required: true
             example: Medlemsintäkter
           description:
             description: Account description
             type: string
             example: Innehåller endast medlemsavgifter för årsmedlemskap
-      delete:
-        description: Deletes an account specified by account_id
+      /{account_id}:
+        description: Returns an invidual account
+        get:
+          description: Returns an account specified by account_id
+        put:
+          description: Updates an account specified by account_id
+          queryParameters:
+            account_number:
+              description: Account number
+              type: integer
+              example: 3890
+            title:
+              description: Account title
+              type: string
+              example: Medlemsintäkter
+            description:
+              description: Account description
+              type: string
+              example: Innehåller endast medlemsavgifter för årsmedlemskap
+        delete:
+          description: Deletes an account specified by account_id
 
-  /costcenter:
-    is: [ paged ]
-    description: Manage cost centers
-    get:
-      description: Returns a list of all cost centers
-    post:
-      description: Create a new cost center
-    /{costcenter_id}:
-      description: Manage a single cost center
+    /instruction:
+      description: Manage accounting instructions
       get:
-        description: Returns a single cost center
-      put:
-        description: Updates a cost center
-      delete:
-        description: Deletes a cost center
-
-  /instruction:
-    is: [ paged ]
-    description: Manage accounting instructions
-    get:
-      description: Returns a list of all accounting instructions
-      queryParameters:
-        account_id:
-          description: Filter instruction with a transaction to or from the specified account_id
-          type: integer
-    post:
-      body:
-        application/json:
-          schema: |
-            {
-                "$schema": "http://json-schema.org/draft-03/schema",
-                "type": "object",
-                "properties": {
-                  "last_read_at": {
-                    "description": "Describes the last point that notifications were checked. Anything updated since this time will not be updated. Default: Now.",
-                    "type": "string"
+        is: [ paged, sortable, searchable ]
+        description: Returns a list of all accounting instructions
+        queryParameters:
+          account_id:
+            description: Filter instruction with a transaction to or from the specified account_id
+            type: integer
+      post:
+        body:
+          application/json:
+            schema: |
+              {
+                  "$schema": "http://json-schema.org/draft-03/schema",
+                  "type": "object",
+                  "properties": {
+                    "last_read_at": {
+                      "description": "Describes the last point that notifications were checked. Anything updated since this time will not be updated. Default: Now.",
+                      "type": "string"
+                    }
                   }
-                }
-            }
-      responses:
-        205:
-          description: Marked as read.
-    /{instruction_id}:
-      description: Manage a single accounting instructions
-      get:
-        description: Returns a single accounting instructions
-      put:
-        description: Updates a accounting instructions
-      delete:
-        description: Deletes a accounting instructions
+              }
+        responses:
+          205:
+            description: Marked as read.
+      /{instruction_id}:
+        description: Manage a single accounting instructions
+        get:
+          description: Returns a single accounting instructions
+        put:
+          description: Updates a accounting instructions
+        delete:
+          description: Deletes a accounting instructions
 
-  /transaction:
-    is: [ paged ]
-    description: Manage accounting transactions
-    get:
-      description: Returns a list of all accounting transactions
-      queryParameters:
-        account_id:
-          description: Filter transactions to or from the specified account_id
-          type: integer
-    post:
-      description: Create
-    /{instruction_id}:
-      description: Manage a single accounting transactions
+    /transaction:
+      description: Manage accounting transactions
       get:
-        description: Returns a single accounting transactions
-      put:
-        description: Updates a accounting transactions
-      delete:
-        description: Deletes a accounting transactions
+        is: [ paged, sortable, searchable ]
+        description: Returns a list of all accounting transactions
+        queryParameters:
+          account_id:
+            description: Filter transactions to or from the specified account_id
+            type: integer
+      post:
+        description: Create
+      /{instruction_id}:
+        description: Manage a single accounting transactions
+        get:
+          description: Returns a single accounting transactions
+        put:
+          description: Updates a accounting transactions
+        delete:
+          description: Deletes a accounting transactions
+
+    /costcenter:
+      description: Manage cost centers
+      get:
+        is: [ paged, sortable, searchable ]
+        description: Returns a list of all cost centers
+      post:
+        description: Create a new cost center
+      /{costcenter_id}:
+        description: Manage a single cost center
+        get:
+          description: Returns a single cost center
+        put:
+          description: Updates a cost center
+        delete:
+          description: Deletes a cost center
+
+    /masterledger:
+      get:
+        description: Receives the full master ledger
+
+    /valuationreport:
+      get:
+        description: Valuation report
+
+    /resultreport:
+      get:
+        description: Valuation report
+
+  /file/{external_id}/{filename}:
+    get:
+      description: Get attached file
 
   /invoice:
-    is: [ paged ]
     description: Manage invoices
     get:
+      is: [ paged, sortable, searchable ]
       description: Returns a list of all invoices
     post:
       description: Create invoice
@@ -206,19 +234,8 @@ traits:
         get:
           description: Export *.odt
 
-  /valuationreport:
-    get:
-      description: Valuation report
-  /resultreport:
-    get:
-      description: Valuation report
-
-  /file/{external_id}/{filename}:
-    get:
-      description: Get attached file
-
 /mail:
-  description: Mail
+  description: Mail module
   get:
     is: [ paged, sortable, searchable, relations ]
     description: Get collection
@@ -236,7 +253,7 @@ traits:
       description: Add E-mail to send queue
 
 /rfid:
-  description: RFID
+  description: RFID module
   get:
     is: [ paged, sortable, searchable, relations ]
     description: Get collection
@@ -245,12 +262,12 @@ traits:
         description: Filters on the "active" column
         required: false
         type: string
-        enum: [yes,no,auto]
+        enum: [yes, no, auto]
       filter_tagid:
         description: Filters on the "tagid" column
         required: false
         type: string
-        enum: [yes,no,auto]
+        enum: [yes, no, auto]
       filter_startdate:
         description: Filters on the "startdate" column
         required: false
@@ -270,7 +287,7 @@ traits:
       description: Delete model
 
 /sales:
-  description: Sales
+  description: Sales module
   /history:
     description: Sales history
     get:
@@ -318,6 +335,10 @@ traits:
   description: Import
 
 /membership:
+  description: Membership module
+  /authenticate:
+    post:
+      description: Authenticate a member
   /member:
     description: Manage single member accounts
     get:
@@ -333,9 +354,10 @@ traits:
         description: Updates a member
       delete:
         description: Deletes a member
-  /authenticate:
-    post:
-      description: Authenticate a member
+      /groups:
+        get:
+          is: [ paged, sortable, searchable ]
+          description: Get all groups the member is in
   /group:
     description: Groups
     get:
@@ -350,6 +372,10 @@ traits:
         description: Update model
       delete:
         description: Delete model
+      /members:
+        get:
+          is: [ paged, sortable, searchable ]
+          description: Return a list of members in this group
   /role:
       description: Roles
       get:
