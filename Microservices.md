@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html>
 <head>
-	<meta charset="utf-8">
-	<title>MakerAdmin v1.0 teknisk dokumentation</title>
 	<style>
 		html, body {
 			font-family: Helvetica, Verdana;
 		}
 
-		body {
-			background-color: #ddd;
-			margin: 0;
-		}
-
-		#content {
-			margin: 10px auto;
-			padding: 30px;
-			border-left: 1px solid #666;
-			border: 1px solid #666;
-			background-color: #fff;
-			max-width: 1000px;
-		}
 
 		h1 {
 			margin: 0;
@@ -48,18 +31,12 @@
 		}
 	</style>
 </head>
-<body>
+
+Moduler / micro services i MakerAdmin v0.1
+==========================================
 
 <div id="content">
-	<h1>MakerAdmin v1.0 teknisk dokumentation</h1>
-	<p class="obs">OBS: Namnet är bara ett projektnamn och kan komma att ändras.</p>
-	<p class="obs">OBS: Alla GitHub länkarna fungerar inte än. Arbetet att skapa repositories pågår.</p>
-	<p>MakerAdmin är ett IT-stödsystem för att underlätta administration i Makerspace eller annan liknande organisation. Systemet är tänkt att erbjudas som en tjänst på nationell nivå. Självklart är systemet open source och går enkelt att sätta upp på en egen server.</p>
-
-	<h3>Micro services</h3>
-	<p>Systemet är uppbyggt på en så kallad "micro services"-arkitektur. Detta innebär i praktiken att man bryter isär ett störra system (monolit) till små inviduella tjänster. Varje micro service ska i största möjliga mån vara fristående från resten av systemet, men kan självklart kommunicera med andra tjänster. På så vis kan en utvecklare eller ett team fokusera på en modul och det blir sedan enkelt att driftsätta den som en del av systemet.</p>
-
-	<h2>Moduler / micro services</h2>
+	<p class="obs">OBS: Denna lista är inte uppdaterad på väldigt länge och stämmer inte överens med verkligheten.</p>
 
 	<div class="task">
 		<h3>Frontend</h3>
@@ -81,7 +58,7 @@
 		<h3>API gateway</h3>
 		<dl>
 			<dt>GitHub</dt>
-			<dd><a target="_blank" href="https://github.com/MakersOfSweden/MakerAdmin-API_Gateway">https://github.com/MakersOfSweden/MakerAdmin-API_Gateway</a></dd>
+			<dd><a target="_blank" href="https://github.com/MakersOfSweden/MakerAdmin-ApiGateway">https://github.com/MakersOfSweden/MakerAdmin-ApiGateway</a></dd>
 			<dt>Status</dt>
 			<dd>Utvecklingsarbete pågår</dd>
 		</dl>
@@ -129,7 +106,7 @@
 		<h3>Ekonomi</h3>
 		<dl>
 			<dt>GitHub</dt>
-			<dd><a target="_blank" href="https://github.com/MakersOfSweden/MakerAdmin-Accounting">https://github.com/MakersOfSweden/MakerAdmin-Accounting</a></dd>
+			<dd><a target="_blank" href="https://github.com/MakersOfSweden/MakerAdmin-Economy">https://github.com/MakersOfSweden/MakerAdmin-Economy</a></dd>
 			<dt>Status</dt>
 			<dd>Utvecklingsarbete pågår</dd>
 		</dl>
@@ -405,9 +382,6 @@
 		</ul>
 	</div>
 </div>
-
-</body>
-</html>
 
 <!--
 Config
