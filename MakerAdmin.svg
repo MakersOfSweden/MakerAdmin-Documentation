@@ -25,16 +25,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.73049944"
+     inkscape:zoom="0.69043651"
      inkscape:cx="561.25984"
-     inkscape:cy="396.85039"
+     inkscape:cy="394.45763"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="true"
-     inkscape:window-width="1280"
-     inkscape:window-height="800"
+     inkscape:window-width="1278"
+     inkscape:window-height="758"
      inkscape:window-x="0"
-     inkscape:window-y="0"
+     inkscape:window-y="20"
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:snap-bbox-edge-midpoints="false"
@@ -51,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -298,7 +298,7 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 164.04166,148.83334 v 127 h 15.875"
+       d="m 164.04166,148.83334 1e-5,126.99999 h 15.875"
        id="path1095"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccc" />
@@ -417,9 +417,27 @@
          style="font-size:5.64444447px;stroke-width:0.26458332px">RFID</tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 164.04166,244.08334 h 15.875"
+       d="m 164.04167,244.08333 15.87499,1e-5"
        id="path1097-0"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:#7fffff;fill-opacity:1;fill-rule:nonzero;stroke:#010000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect971-7-2-0-2-3-3"
+       width="42.33334"
+       height="21.166666"
+       x="232.83333"
+       y="265.25" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:5.64444447px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="244.04643"
+       y="277.34091"
+       id="text857-3-2-6-6"><tspan
+         sodipodi:role="line"
+         id="tspan855-6-9-1-7"
+         x="244.04643"
+         y="277.34091"
+         style="font-size:5.64444447px;stroke-width:0.26458332px">MySQL</tspan></text>
   </g>
 </svg>
