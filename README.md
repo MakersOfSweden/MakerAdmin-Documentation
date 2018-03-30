@@ -9,6 +9,8 @@ MakerAdmin består av ett antal olika moduler som tillsammans hjälper er som dr
 **OBS: Det finns mängder med information att uppdatera i denna dokumentation**
 
 * [api-v0.1.raml](API/api-v0.1.raml) är inte uppdaterad på länge
+* Uppdatera api-console till 4.x
+* Dokumentera [MakerAdmin-Hub](https://github.com/makerspace/MakerAdmin-Hub)
 * [Microservices.md](Microservices) stämmer ej överens med verkligheten
 * [CONTRIBUTING.md](CONTRIBUTING.md) är icke existerande + att länkning ej fungerar
 * [GDPR.md](GDPR) är icke existerande
